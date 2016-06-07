@@ -1,0 +1,58 @@
+13.03
+
+x osadzenie fields w boardvm
+x menu + menu manager
+x podzial mainvm na obszary
+
+x dopasowanie rozmiaru
+x click event 
+
+- parser xml
+x positionhelper dekodujacy string
+x projekt testowy
+
+x fabryka pozycji
+
+
+----------------------------------------
+
+16.03
+
+x navigation panel
+x bicie ruchow
+
+x (bug) kolor kamienia
+x wprowadzenie eventow
+
+-----------------------------------------
+
+- bicie lancuchów
+- koncepcja bicia
+
+- opis metod probabilist. monte carlo z 93
+
+- funkcja random
+
+- parser
+- zapisywanie i wczytywanie pozycji
+- dodatkowe dane o grze - liczba ruchow, zapis -> navigation panel
+
+
+- metody rozruchowe
+- start nowej rozgrywki - odswiezenie widoku
+
+- widok na 9x9
+
+- menu z wyborem zormiaru planszy
+
+- rozmiar
+
+- ikona do ramki
+
+- koniec gry - przycisk poddania, czasomierz
+
+
+- zarzadzanie kolorami, zasoby stat. ze sciezkami
+- navigation vm (lista ruchow)
+
+- projekt testowy
