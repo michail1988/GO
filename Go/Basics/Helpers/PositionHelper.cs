@@ -61,7 +61,7 @@ namespace Go.Basics.Helpers
         public static string MoveDescription(int listPosition)
         {
             int dimension = (int) Settings.BoardSize;
-            string letter = encodeLetter(listPosition % dimension);
+            string letter = EncodeLetter(listPosition % dimension);
             int y = dimension - (listPosition / dimension);
 
             return letter + y.ToString();
@@ -159,7 +159,7 @@ namespace Go.Basics.Helpers
             return letter - 97;
         }
 
-        private static string encodeLetter(int position)
+        public static string EncodeLetter(int position)
         {
             char ch = Convert.ToChar(position + 65);
             return ch.ToString();

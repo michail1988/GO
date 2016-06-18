@@ -10,6 +10,7 @@ using Go.Basics;
 using Go.Infrastructure.App;
 using Go.ViewModels;
 using Microsoft.Practices.Prism.Commands;
+using Go.Infrastructure.Settings;
 
 namespace Go.Views.Board
 {
@@ -18,7 +19,9 @@ namespace Go.Views.Board
         #region Fields
 
         private ObservableCollection<FieldViewModel> board;
-
+        private ObservableCollection<CoordinateViewModel> xCoordinatesFields;
+        private ObservableCollection<CoordinateViewModel> yCoordinatesFields;
+        
         // TODO !
         public GameController gameController;
         private DelegateCommand randomAlgorithm;
@@ -53,6 +56,22 @@ namespace Go.Views.Board
             }
         }
 
+        public ObservableCollection<CoordinateViewModel> XCoordinatesFields
+        {
+            get
+            {
+                return this.xCoordinatesFields;
+            }
+        }
+
+        public ObservableCollection<CoordinateViewModel> YCoordinatesFields
+        {
+            get
+            {
+                return this.yCoordinatesFields;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -82,11 +101,18 @@ namespace Go.Views.Board
             {
                 this.board.Clear();
             }
-
-            this.board = BoardFactory.CreateBoardFromContext(19 * 19, this.gameController);
+            
+            this.board = BoardFactory.CreateBoardFromContext(this.gameController);
             this.RefreshFields();
 
             this.RaisePropertyChanged(() => this.BoardFields);
+
+            // TODO move to the BoardFactory
+            this.xCoordinatesFields = BoardFactory.CreateXCoordinates();
+            this.yCoordinatesFields = BoardFactory.CreateYCoordinates();
+
+            this.RaisePropertyChanged(() => this.XCoordinatesFields);
+            this.RaisePropertyChanged(() => this.YCoordinatesFields);
         }
 
         #endregion

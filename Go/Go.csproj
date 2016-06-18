@@ -132,6 +132,10 @@
       <DependentUpon>BoardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Board\BoardViewModel.cs" />
+    <Compile Include="Views\Board\CoordinateView.xaml.cs">
+      <DependentUpon>CoordinateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Board\CoordinateViewModel.cs" />
     <Compile Include="Views\Board\FieldView.xaml.cs">
       <DependentUpon>FieldView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Board\BoardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Board\CoordinateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

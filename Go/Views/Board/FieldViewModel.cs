@@ -19,6 +19,7 @@ namespace Go.Views.Board
         #region Fields
 
         private DelegateCommand clickCommand;
+        private DelegateCommand mouseOverCommand;
 
         private GameController gameController;
 
@@ -39,6 +40,7 @@ namespace Go.Views.Board
             //this.fieldState = state;
 
             this.clickCommand = new DelegateCommand(this.OnClick, this.CanClick);
+            this.mouseOverCommand = new DelegateCommand(this.OnMouseOver, this.CanClick);
         }
 
         #endregion
@@ -50,6 +52,15 @@ namespace Go.Views.Board
             get
             {
                 return this.clickCommand;
+            }
+        }
+
+        public ICommand MouseOverCommand
+        {
+            // tODO nie dziala...
+            get
+            {
+                return this.mouseOverCommand;
             }
         }
 
@@ -165,6 +176,11 @@ namespace Go.Views.Board
 
             this.RaisePropertyChanged(() => this.Field);
             this.RaisePropertyChanged(() => this.UserField);
+        }
+
+        private void OnMouseOver()
+        {
+            System.Console.Write("dsf");
         }
 
         /// <summary>

@@ -10,17 +10,23 @@
         <DataTemplate DataType="{x:Type views:FieldViewModel}">
             <views:FieldView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type views:CoordinateViewModel}">
+            <views:CoordinateView/>
+        </DataTemplate>
     </UserControl.Resources>
         <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
                 <RowDefinition Height="Auto" />
-            <!--<RowDefinition Height="*" /> Margin="20,10,20,20"-->
+                <RowDefinition Height="25" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <!--<ColumnDefinition Width="*" />-->
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="25" />
+            <!--<ColumnDefinition Width="*" />-->
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" >
             <ItemsControl ItemsSource="{Binding BoardFields}" HorizontalAlignment="Center">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -34,5 +40,45 @@
                 </ItemsControl.InputBindings>
             </ItemsControl>
             </StackPanel>
+            
+            <!-- X Coordinates -->
+        <StackPanel Grid.Row="0" Grid.Column="1" >
+            <ItemsControl ItemsSource="{Binding XCoordinatesFields}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Width ="760" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" >
+            <ItemsControl ItemsSource="{Binding XCoordinatesFields}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Width ="760" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Y Coordinates -->
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+            <ItemsControl ItemsSource="{Binding YCoordinatesFields}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" Width ="760"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" >
+            <ItemsControl ItemsSource="{Binding YCoordinatesFields}" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" Width ="760"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>
