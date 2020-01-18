@@ -36,6 +36,95 @@
         </Grid.ColumnDefinitions>
 
         <Ribbon x:Name="RibbonWin"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" SelectedIndex="0">
+
+            
+                <!-- Help Pane, located at the right-hand side -->
+                <Ribbon.HelpPaneContent>
+                    <RibbonButton SmallImageSource="Images\question.png" />
+                </Ribbon.HelpPaneContent>
+                <!-- Quick Access Toolbar - located at the upper-left corner -->
+                <Ribbon.QuickAccessToolBar>
+                    <RibbonQuickAccessToolBar>
+                        <RibbonButton x:Name ="Save" SmallImageSource="Images\question.png" />
+                        <RibbonSplitButton x:Name ="Undo" SmallImageSource="Images\question.png">
+                            <RibbonSplitMenuItem Header="Undo 1" />
+                            <RibbonSplitMenuItem Header="Undo 2" />
+                            <RibbonSplitMenuItem Header="Undo 3" />
+                        </RibbonSplitButton>
+                        <RibbonSplitButton x:Name="Redo" SmallImageSource="Images\question.png" >
+                            <RibbonSplitMenuItem Header="Redo 1" />
+                            <RibbonSplitMenuItem Header="Redo 2" />
+                        </RibbonSplitButton>
+                    </RibbonQuickAccessToolBar>
+                </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu KeyTip="F">
+                    <RibbonApplicationMenuItem Header="Nowa gra" Command="{Binding Path=Menu.NewGame}" ImageSource="Images\question.png" />
+                    <RibbonSeparator />
+                    <RibbonApplicationMenuItem Header="Otworz" IsEnabled ="False" Command="{Binding Path=Menu.OpenGame}" ImageSource="Images\question.png" />
+                    <RibbonApplicationMenuItem Header="Zapisz" IsEnabled ="False" Command="{Binding Path=Menu.SaveGame}" ImageSource="Images\question.png" />
+                    <RibbonSeparator />
+                    <RibbonApplicationMenuItem Header="Exit" ImageSource="Images\question.png" Command="{Binding Path=Menu.Exit}" />
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Gra" KeyTip="G">
+                <!-- Play mode  group-->
+                <RibbonGroup x:Name="PlayModeGroup" Header="Tryb">
+                    <RibbonCheckBox Label="2 graczy" Command="{Binding Path=Menu.HumanVsHuman}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.HumanVsHumanChecked}" />
+                    <RibbonCheckBox Label="Gra z komputerem" Command="{Binding Path=Menu.HumanVsMashine}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.HumanVsMashineChecked}" />
+                </RibbonGroup>
+
+                <!-- Algorithm group-->
+                <RibbonGroup x:Name="AlgorithmGroup" Header="Algorytm" IsEnabled="{Binding Path=Menu.HumanVsMashineChecked}">
+                    <RibbonCheckBox Label="Losowy" Command="{Binding Path=Menu.RandomAlgorithm}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.RandomAlgorithmChecked}"/>
+                    <RibbonCheckBox Label="MinMax" Command="{Binding Path=Menu.MinMaxAlgorithm}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.MinMaxAlgorithmChecked}"/>
+                    <RibbonCheckBox Label="Prosty" Command="{Binding Path=Menu.SimpleBeatingAlgorithm}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.SimpleBeatingAlgorithmChecked}"/>
+
+                </RibbonGroup>
+            </RibbonTab>
+            
+            <!-- Ribbon Tab #1: Home -->
+            <RibbonTab Header="Home" KeyTip="H" >
+                <!-- Home  group-->
+                <RibbonGroup x:Name="ClipboardGroup" Header="Home">
+                    <RibbonMenuButton LargeImageSource="Images\question.png" Label="Paste" KeyTip="V">
+                        <RibbonMenuItem ImageSource="Images\question.png" Header="Keep Text Only" KeyTip="T"/>
+                        <RibbonMenuItem ImageSource="Images\question.png" Header="Paste Special..." KeyTip="S"/>
+                    </RibbonMenuButton>
+                    <RibbonButton SmallImageSource="Images\question.png" Label="Cut" KeyTip="X" />
+                    <RibbonButton SmallImageSource="Images\question.png" Label="Copy" KeyTip="C" />
+                    <RibbonButton SmallImageSource="Images\question.png" Label="Format Painter" KeyTip="FP" />
+                </RibbonGroup>
+                <!-- Employee And Payroll group-->
+                <RibbonGroup x:Name="Employee" Header="Employee And Payroll">
+                    <RibbonMenuButton LargeImageSource="Images\question.png" Label="Employee" KeyTip="V">
+                        <RibbonMenuItem ImageSource="Images\question.png" Header="Keep Text Only" KeyTip="T"/>
+                        <RibbonMenuItem ImageSource="Images\question.png" Header="Paste Special..." KeyTip="S"/>
+                    </RibbonMenuButton>
+                    <RibbonButton SmallImageSource="Images\question.png" Label="Save" KeyTip="X" />
+                    <RibbonButton SmallImageSource="Images\question.png" Label="Add" KeyTip="C" />
+                </RibbonGroup>
+            </RibbonTab>
+            <!-- Ribbon Tab #2: -->
+            <RibbonTab Header="Insert" KeyTip="I">
+            </RibbonTab>
+            <!-- Ribbon Tab #3: -->
+            <RibbonTab Header="Opcje" KeyTip="L">
+
+                <RibbonGroup x:Name="BoardGroup" Header="Plansza">
+                    <RibbonCheckBox Label="19x19" Command="{Binding Path=Menu.ChangeBoardSize}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.IsBoard_19_19}"/>
+                    <RibbonCheckBox Label="10x10" Command="{Binding Path=Menu.ChangeBoardSize}" 
+                          IsEnabled="True" IsChecked="{Binding Path=Menu.IsBoard_10_10}"/>
+                </RibbonGroup>
+            </RibbonTab>
+
+            
         </Ribbon>
         
         
