@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Go.Infrastructure.Core.IO;
 using Go.ViewModels;
-
+using Go.Infrastructure.App;
 using Go.Infrastructure.Settings;
 
 using Microsoft.Practices.Prism.Commands;
@@ -279,6 +279,7 @@ namespace Go.Infrastructure.Core.Menu
                 if (value == true)
                 {
                     Settings.Settings.Algorithm = AlgorithmEnum.Random;
+                    AppManager.GameController.RefreshAlgorithm();
                 }
 
                 this.RaisePropertyChanged(() => this.SimpleBeatingAlgorithmChecked);
@@ -303,6 +304,7 @@ namespace Go.Infrastructure.Core.Menu
                 if (value == true)
                 {
                     Settings.Settings.Algorithm = AlgorithmEnum.MinMax;
+                    AppManager.GameController.RefreshAlgorithm();
                 }
 
                 this.RaisePropertyChanged(() => this.SimpleBeatingAlgorithmChecked);
@@ -327,6 +329,7 @@ namespace Go.Infrastructure.Core.Menu
                 if (value == true)
                 {
                     Settings.Settings.Algorithm = AlgorithmEnum.SimpleBeating;
+                    AppManager.GameController.RefreshAlgorithm();
                 }
 
                 this.RaisePropertyChanged(() => this.SimpleBeatingAlgorithmChecked);

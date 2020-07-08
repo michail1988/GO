@@ -34,7 +34,7 @@ namespace Go.Basics
         public GameController(GameContext gameContext)
         {
             this.gameContext = gameContext;
-            setAlgorithm(gameContext);
+            RefreshAlgorithm();
         }
 
         #endregion
@@ -66,7 +66,7 @@ namespace Go.Basics
             {
                 this.gameContext = value;
                 // TODO refresh by property/ another places!
-                setAlgorithm(gameContext);
+                RefreshAlgorithm();
                 this.RaiseNewGameEvent();
             }
         }
@@ -98,6 +98,25 @@ namespace Go.Basics
             }            
         }
 
+        public void RefreshAlgorithm()
+        {
+            switch (Settings.Algorithm)
+            {
+                case AlgorithmEnum.MinMax:
+                    this.algorithm = new BeatingAlgorithm(this.gameContext);
+                    break;
+                case AlgorithmEnum.Random:
+                    this.algorithm = new RandomAlgorithm(this.gameContext);
+                    break;
+                case AlgorithmEnum.SimpleBeating:
+                    this.algorithm = new SimpleBeatingAlgorithm(this.gameContext);
+                    break;
+                default:
+                    // TODO Exception
+                    break;
+            }
+        }
+
         private void makeComputerMove()
         {
             MoveCandidate moveCandidate = this.algorithm.Play();
@@ -120,25 +139,6 @@ namespace Go.Basics
 
             // TODO delays game
             this.RaiseRefreshViewEvent();
-        }
-
-        private void setAlgorithm(GameContext gameContext)
-        {
-            switch (Settings.Algorithm)
-            {
-                case AlgorithmEnum.MinMax:
-                    this.algorithm = new BeatingAlgorithm(gameContext);
-                    break;
-                case AlgorithmEnum.Random:
-                    this.algorithm = new RandomAlgorithm(gameContext);
-                    break;
-                case AlgorithmEnum.SimpleBeating:
-                    this.algorithm = new SimpleBeatingAlgorithm(gameContext);
-                    break;
-                default:
-                    // TODO Exception
-                    break;
-            }
         }
 
         #endregion
