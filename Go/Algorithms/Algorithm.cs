@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Go.Basics.Common;
 
 namespace Go.Algorithms
 {
@@ -25,7 +26,7 @@ namespace Go.Algorithms
 
         #region Methods
 
-        public abstract int Play();
+        public abstract MoveCandidate Play();
 
         #endregion
     }

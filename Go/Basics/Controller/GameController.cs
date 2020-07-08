@@ -9,7 +9,9 @@ using Go.Basics.Common;
 using Go.Basics.Factories;
 using Go.Basics.Helpers;
 using Go.Infrastructure.Events;
+using Go.Infrastructure.Log;
 using Go.Infrastructure.Settings;
+using Go.Log;
 
 namespace Go.Basics
 {
@@ -98,18 +100,23 @@ namespace Go.Basics
 
         private void makeComputerMove()
         {
-            int index = this.algorithm.Play();
+            MoveCandidate moveCandidate = this.algorithm.Play();
+
+            MoveInfo logInfo = new MoveInfo(moveCandidate.FieldToMove, moveCandidate.Evaluation);
+            this.gameContext.Info = logInfo;
+
 
             // TODO Validation
             // if the pawn is placed on the deadly square
 
-            if (ValidationHelper.IsValid(this.GameContext, index) == false)
+            if (ValidationHelper.IsValid(this.GameContext, moveCandidate.FieldToMove) == false)
             {
                 // never occurs TODO
                 return;
             }
 
-            PositionController.MakeMove(this.GameContext, index);
+            PositionController.MakeMove(this.GameContext, moveCandidate.FieldToMove);
+
 
             // TODO delays game
             this.RaiseRefreshViewEvent();

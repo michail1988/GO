@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Go.Algorithm.Rules;
 using Go.Infrastructure.Settings;
+using Go.Log;
+using Go.Basics.Common;
 
 namespace Go.Algorithms
 {
@@ -35,7 +37,7 @@ namespace Go.Algorithms
 
         #region Methods
 
-        public override int Play()
+        public override MoveCandidate Play()
         {
             int dimension = (int) Settings.BoardSize;
             // TODO
@@ -46,9 +48,17 @@ namespace Go.Algorithms
 
                 if (this.gameContext.GetField(fieldIndex).FieldState.Equals(States.Empty))
                 {
-                    return fieldIndex;
+
+                    MoveInfo logInfo = new MoveInfo("Wylosowalem taki ruch=" + fieldIndex);
+
+                    this.gameContext.Info = logInfo;
+
+                    MoveCandidate move = new MoveCandidate(fieldIndex);
+
+                    return move;
                 }
             }
+            
             
         }
 

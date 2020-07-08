@@ -10,7 +10,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="700" />
             <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="100" />
             
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -49,5 +50,8 @@
 
         <TextBlock Grid.Row ="2" Grid.Column="1"  Text="{Binding Path=Evaluation}" HorizontalAlignment="Center"/>
 
+      <Border Grid.Row ="4" Grid.Column="1" BorderThickness="1" BorderBrush="Black">
+        <TextBlock Text="{Binding Path=LogInfo}" FontWeight="Bold" Margin="5,0,5,0" />
+      </Border>
     </Grid>
 </UserControl>

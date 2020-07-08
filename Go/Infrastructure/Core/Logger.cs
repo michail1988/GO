@@ -10,7 +10,7 @@ using Microsoft.Build.Utilities;
 namespace Go.Infrastructure.Core
 {
 
-    public static class Logger /* :  Microsoft.Build.Utilities.Logger* */
+    public static class ConsoleLogger /* :  Microsoft.Build.Utilities.Logger* */
     {
 
         public static void Log(String message)

@@ -20,6 +20,17 @@ namespace Go.Basics.Common
             this.PositionContext = positionContext;
         }
 
+        public MoveCandidate(int fieldToMove)
+        {
+            this.FieldToMove = fieldToMove;
+        }
+
+        public MoveCandidate(int fieldToMove, double evaluation)
+        {
+            this.FieldToMove = fieldToMove;
+            this.Evaluation = evaluation;
+        }
+
         public double Evaluation
         {
             get { return evaluation; }
@@ -32,6 +43,7 @@ namespace Go.Basics.Common
             set { fieldToMove = value; }
         }
 
+        //TODO Michal to nie jest na razie wykorzystywane
         public PositionContext PositionContext
         {
             get { return positionContext; }

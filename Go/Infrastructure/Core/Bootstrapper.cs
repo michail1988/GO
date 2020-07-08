@@ -85,7 +85,7 @@ namespace Go.Infrastructure.Core
 
         protected virtual void RegisterBootstrapperProvidedTypes()
         {
-            //this.Container.ComposeExportedValue<ILoggerFacade>(this.Logger);
+            //this.Container.ComposeExportedValue<ILoggerFacade>(this.ConsoleLogger);
             //this.Container.ComposeExportedValue<IModuleCatalog>(this.ModuleCatalog);
             //this.Container.ComposeExportedValue<IServiceLocator>(new MefServiceLocatorAdapter(this.Container));
             //this.Container.ComposeExportedValue<AggregateCatalog>(this.AggregateCatalog);

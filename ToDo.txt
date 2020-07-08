@@ -1,3 +1,10 @@
+nie dzia³a prze³¹czanie algorytmów
+
+
+
+
+
+
 13.03
 
 x osadzenie fields w boardvm

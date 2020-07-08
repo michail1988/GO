@@ -85,6 +85,7 @@ namespace Go.Basics.Factories
             {
                 foreach(var p in field.Chain.Pawns) 
                 {
+                    //NPE on Chain
                     neighbour.Chain.AddPawn(p);
                 }
 

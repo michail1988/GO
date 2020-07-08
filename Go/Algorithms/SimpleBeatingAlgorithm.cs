@@ -31,7 +31,7 @@ namespace Go.Algorithms
 
         #region Methods
 
-        public override int Play()
+        public override MoveCandidate Play()
         {
             return FindCandidate(this.gameContext);
         }
@@ -40,7 +40,7 @@ namespace Go.Algorithms
         /// </summary>
         /// <param name="positionContext"></param>
         /// <returns></returns>
-        private int FindCandidate(PositionContext positionContext)
+        private MoveCandidate FindCandidate(PositionContext positionContext)
         {
             List<int> candidates = new List<int> ();
 
@@ -84,13 +84,13 @@ namespace Go.Algorithms
             // TODO defence by beating
             if (biggestSizeToBeat > 0 && biggestSizeToBeat >= biggestLost)
             {
-                return biggestToBeat.SurroundingEmptyFields.First();
+                return new MoveCandidate(biggestToBeat.SurroundingEmptyFields.First());
             }
             else
             {
                 if (biggestLost > 0)
                 {
-                    return biggestChainToLost.SurroundingEmptyFields.First();
+                    return new MoveCandidate(biggestChainToLost.SurroundingEmptyFields.First());
                 }
 
             }
@@ -100,7 +100,7 @@ namespace Go.Algorithms
             {
                 // TODO has surrounding empty spaces/ could be connected to another chain without self-killing
                 //this.gameContext.GetField(biggestChainToLost.SurroundingEmptyFields.First()).
-                return biggestChainToLost.SurroundingEmptyFields.First();
+                return new MoveCandidate(biggestChainToLost.SurroundingEmptyFields.First());
             }
              
 
@@ -119,7 +119,7 @@ namespace Go.Algorithms
             // TODO
             if (biggestSizeToSurround > 0)
             {
-                return biggest.SurroundingEmptyFields.First();
+                return new MoveCandidate(biggest.SurroundingEmptyFields.First());
             }
 
             int dimension = (int)Settings.BoardSize;
@@ -131,12 +131,12 @@ namespace Go.Algorithms
 
                 if (positionContext.GetField(fieldIndex).FieldState.Equals(States.Empty))
                 {
-                    return fieldIndex;
+                    return new MoveCandidate(fieldIndex);
                 }
             }
 
             // TODO
-            return 4;
+            return new MoveCandidate(4);
         }
 
         #endregion

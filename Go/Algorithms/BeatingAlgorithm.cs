@@ -10,6 +10,8 @@ using Go.Algorithm.Rules;
 using Go.Basics.Common;
 using Go.Infrastructure.Settings;
 using Go.Basics.Factories;
+using Go.Basics.Helpers;
+using Go.Log;
 
 namespace Go.Algorithms
 {
@@ -35,13 +37,13 @@ namespace Go.Algorithms
 
         #region Methods
 
-        public override int Play()
+        public override MoveCandidate Play()
         {
             States move = this.gameContext.Move;
 
             List<int> candidates = FindCandidates(this.gameContext);
 
-            Logger.Log("------------------------------------------------------");
+            ConsoleLogger.Log("------------------------------------------------------");
             computedVariation = 0;
             List<MoveCandidate> moveCandidates = new List<MoveCandidate>();
             foreach (int i in candidates)
@@ -61,21 +63,22 @@ namespace Go.Algorithms
             }
 
             var bestCandidate = getBest(moveCandidates, move);
-            Logger.Log("Wybrano: " + bestCandidate.FieldToMove + " Ocena " + bestCandidate.Evaluation);
-            Logger.Log("Przeliczono: " + computedVariation); 
-            return bestCandidate.FieldToMove;
+            ConsoleLogger.Log("Wybrano: " + bestCandidate.FieldToMove + " Ocena " + bestCandidate.Evaluation);
+            ConsoleLogger.Log("Przeliczono: " + computedVariation);
+
+            return bestCandidate;
         }
 
         private MoveCandidate analyze(int depth, int field, PositionContext position)
         {
-            Logger.LogDepth(depth);
-            Logger.LogMove(position);
+            ConsoleLogger.LogDepth(depth);
+            ConsoleLogger.LogMove(position);
             if (depth == Settings.MaxDepth)
             {
                 MoveCandidate candidate = new MoveCandidate(field, position);
                 PositionController.MakeMove(position, field);
                 candidate.Evaluation = evaluate(position);
-                Logger.Log(candidate.Evaluation.ToString());
+                ConsoleLogger.Log(candidate.Evaluation.ToString());
                 computedVariation++;
                 return candidate;
             }
@@ -85,10 +88,10 @@ namespace Go.Algorithms
             List<int> candidates = FindCandidates(position);
             if (candidates.Count == 0)
             {
-                Logger.Log("! nie znaleziono ruchow kandydatow!");
+                ConsoleLogger.Log("! nie znaleziono ruchow kandydatow!");
             }
 
-            Logger.Log("Ilość kandydatów: " + candidates.Count);
+            ConsoleLogger.Log("Ilość kandydatów: " + candidates.Count);
 
             List<MoveCandidate> moveCandidates = new List<MoveCandidate>();
             foreach (var i in candidates)
@@ -100,7 +103,7 @@ namespace Go.Algorithms
             }
 
             var bestCandidate = getBest(moveCandidates, move);
-            Logger.Log("Z " + candidates.Count + " wariantow wybrano: " + bestCandidate.Evaluation.ToString());
+            ConsoleLogger.Log("Z " + candidates.Count + " wariantow wybrano: " + bestCandidate.Evaluation.ToString());
             return bestCandidate;
         }
 
@@ -117,7 +120,7 @@ namespace Go.Algorithms
             int biggestSizeToBeat = 0;
             Chain biggestToBeat = null;
             // find chain to beat
-            foreach (var chain in positionContext.Chains.Where(x => x.Color != positionContext.Move))
+            foreach (var chain in positionContext.Chains.Where(x => x.Color != positionContext.Move && !x.Beated))
             {
                 if (chain.SurroundingEmptyFields.Count == 1)
                 {
@@ -219,26 +222,25 @@ namespace Go.Algorithms
 
             if (candidates.Count == 0)
             {
-                // find biggest chain and try to surround
-                int biggestSizeToSurround = 0;
-                Chain biggest = null;
-                foreach (var chain in positionContext.Chains.Where(x => x.Color != positionContext.Move))
-                {
-                    if (chain.Count > biggestSizeToSurround)
-                    {
-                        biggestSizeToSurround = chain.Count;
-                        biggest = chain;
-                    }
-                }
+                // find biggest chain and try to 
+                Chain biggest = AlgorithmHelper.GetBiggestUnbeatenChain(positionContext);
 
-                if (biggestSizeToSurround > 0)
+                if (biggest != null)
                 {
                     candidates.AddRange(biggest.SurroundingEmptyFields);
                 }
             }
 
-            return candidates;
+            if (candidates.Count == 0)
+            {
+                //TODO Michal to jest blad petli powyzej~!
+
+            }
+
+                return candidates;
         }
+
+        
 
         #endregion
 

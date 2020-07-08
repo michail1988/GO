@@ -94,6 +94,7 @@ namespace Go.Views
             this.RaisePropertyChanged(() => this.Evaluation);
             this.RaisePropertyChanged(() => this.WhiteMoves);
             this.RaisePropertyChanged(() => this.BlackMoves);
+            this.RaisePropertyChanged(() => this.LogInfo);
 
         }
 
@@ -103,6 +104,7 @@ namespace Go.Views
             this.RaisePropertyChanged(() => this.Evaluation);
             this.RaisePropertyChanged(() => this.WhiteMoves);
             this.RaisePropertyChanged(() => this.BlackMoves);
+            this.RaisePropertyChanged(() => this.LogInfo);
 
         }
 
@@ -122,5 +124,14 @@ namespace Go.Views
         }
 
         public int SelectedItem;
+
+
+        public String LogInfo
+        {
+            get
+            {
+                return this.controller.GameContext.LogInfo;
+            }
+        }
     }
 }

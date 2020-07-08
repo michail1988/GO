@@ -10,6 +10,7 @@ using Go.Basics.Common;
 using Go.Basics.Helpers;
 using Go.Basics.Rules;
 using Go.Infrastructure.Settings;
+using Go.Log;
 
 namespace Go.Algorithms
 {
@@ -28,7 +29,11 @@ namespace Go.Algorithms
         private DateTime startTime;
 
         private DateTime lastMoveTime;
-               
+
+        private MoveInfo info;
+
+        private LogFormatter logFormatter;
+
         #endregion
 
         #region Constructors
@@ -53,6 +58,8 @@ namespace Go.Algorithms
 
             this.startTime = DateTime.Now;
             this.lastMoveTime = this.startTime;
+
+            this.logFormatter = new LogFormatter();
         }
 
         #endregion
@@ -72,6 +79,28 @@ namespace Go.Algorithms
             get
             {
                 return this.blackMoves;
+            }
+        }
+
+        public String LogInfo
+        {
+            get
+            {
+                return this.logFormatter.Log(this.info);
+                //return this.logInfo + " ruch nr= " + this.whiteMoves.Count;
+            }
+        }
+
+        public MoveInfo Info
+        {
+            get
+            {
+                return this.info;
+            }
+
+            set
+            {
+                this.info = value;
             }
         }
         
